@@ -23,10 +23,6 @@ public class User32 {
     Native.register(NativeLibrary.getInstance("user32", W32APIOptions.DEFAULT_OPTIONS));
   }
 
-  public static final int MOD_ALT = 0x0001;
-  public static final int MOD_CONTROL = 0x0002;
-  public static final int MOD_SHIFT = 0x0004;
-  public static final int MOD_WIN = 0x0008;
   public static final int WM_HOTKEY = 0x0312;
   public static final int PM_REMOVE = 0x0001;
 

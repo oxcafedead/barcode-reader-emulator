@@ -18,7 +18,7 @@ public class HotkeyBindManagerWindowsAdaptor implements HotkeyBindManager {
           SpecialKey.ALT, 0x0001,
           SpecialKey.CTRL, 0x0002,
           SpecialKey.SHIFT, 0x0004,
-          SpecialKey.WIN, MOD_WIN);
+          SpecialKey.WIN, 0x0008);
 
   @Override
   public Optional<Integer> bindKey(
