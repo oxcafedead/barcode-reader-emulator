@@ -39,6 +39,6 @@ task zipExecutableWithRuntime(type: Zip) {
     from "${buildDir}/launch4j/"
     include '*'
     include '**/*'
-    archiveName "distribution-${project.version}.zip"
+    archiveName "emulator.zip"
     destinationDir(file("${buildDir}/distr"))
 }
