@@ -33,12 +33,7 @@ public class HotkeyBindManagerWindowsAdaptor implements HotkeyBindManager {
             .reduce((i1, i2) -> i1 | i2)
             .orElseThrow(IllegalArgumentException::new);
     boolean registered = RegisterHotKey(null, bindId, fsModifiers, keyCode);
-    if (registered) {
-      System.out.println("Bind the hotkey successfully.");
-      return Optional.of(bindId);
-    }
-    System.out.println("Could not bind the hotkey!");
-    return Optional.empty();
+    return registered ? Optional.of(bindId) : Optional.empty();
   }
 
   @Override
@@ -48,11 +43,9 @@ public class HotkeyBindManagerWindowsAdaptor implements HotkeyBindManager {
 
   @Override
   public void listen(Runnable callback) {
-    System.out.println("Starting listening...");
     MSG msg = new MSG();
     while (true) {
       while (PeekMessageA(msg, null, 0, 0, PM_REMOVE)) {
-        System.out.println("Picked up a key! " + msg.message);
         if (msg.message == WM_HOTKEY) {
           callback.run();
         }
@@ -60,8 +53,8 @@ public class HotkeyBindManagerWindowsAdaptor implements HotkeyBindManager {
       try {
         Thread.sleep(300);
       } catch (InterruptedException e) {
-        System.err.println("Error when trying to make thread sleep.");
-        e.printStackTrace();
+        Thread.currentThread().interrupt();
+        return;
       }
     }
   }
