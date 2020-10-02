@@ -16,7 +16,7 @@ dependencies {
 
 jar {
     manifest {
-        attributes "Main-Class": "BarCodeEmulator"
+        attributes "Main-Class": "BarcodeReaderEmulator"
     }
 
     from {
