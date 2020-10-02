@@ -1,4 +1,5 @@
 # Barcode reader emulator
+[![Build Status](https://travis-ci.org/oxcafedead/barcode-reader-emulator.svg?branch=main)](https://travis-ci.org/oxcafedead/barcode-reader-emulator)
 
 A Java 11 console app. Emulates barcode reader device (which behaves like a keyboard).
 Triggers barcode 'reading' with hotkey event which can be configured.

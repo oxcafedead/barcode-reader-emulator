@@ -38,7 +38,7 @@ task zipExecutableWithRuntime(type: Zip) {
     dependsOn tasks.createExe
     from "${buildDir}/launch4j/"
     include '*'
-    include '*/*'
+    include '**/*'
     archiveName "distribution-${project.version}.zip"
     destinationDir(file("${buildDir}/distr"))
 }
