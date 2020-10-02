@@ -1,5 +1,13 @@
 plugins {
     id 'java'
+    id 'org.beryx.runtime' version '1.11.4'
+    id 'edu.sc.seis.launch4j' version '2.4.6'
+}
+
+runtime {
+    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
+    modules = ['java.se', 'java.desktop', 'java.logging']
+    imageDir = file("${buildDir}/launch4j/runtime")
 }
 
 group 'oxcafedead'
@@ -7,6 +15,7 @@ version '0.1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
@@ -14,12 +23,22 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
-jar {
-    manifest {
-        attributes "Main-Class": "BarcodeReaderEmulator"
-    }
+launch4j {
+    mainClassName = 'BarcodeReaderEmulator'
+    icon = "${projectDir}/app.ico"
+    bundledJrePath = 'runtime'
+    bundledJre64Bit = true
+    jar = "${buildDir}/libs/${project.name}-${project.version}.jar"
+    headerType = 'console'
+    restartOnCrash = true
+}
 
-    from {
-        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-    }
+task zipExecutableWithRuntime(type: Zip) {
+    dependsOn tasks.runtime
+    dependsOn tasks.createExe
+    from "${buildDir}/launch4j/"
+    include '*'
+    include '*/*'
+    archiveName "distribution-${project.version}.zip"
+    destinationDir(file("${buildDir}/distr"))
 }
