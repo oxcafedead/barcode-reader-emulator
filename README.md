@@ -15,5 +15,5 @@ You can also run the app with arguments:
 
 **Example**
 ```
-java -jar emulator.jar 123456 ctrl_alt_f 30
+emulator.exe 123456 ctrl_alt_f 30
 ```
