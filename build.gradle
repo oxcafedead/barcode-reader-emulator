@@ -11,7 +11,7 @@ runtime {
 }
 
 group 'oxcafedead'
-version '0.1.0'
+version '0.2.0'
 
 repositories {
     mavenCentral()
@@ -29,8 +29,7 @@ launch4j {
     bundledJrePath = 'runtime'
     bundledJre64Bit = true
     jar = "${buildDir}/libs/${project.name}-${project.version}.jar"
-    headerType = 'console'
-    restartOnCrash = true
+    restartOnCrash = false
 }
 
 task zipExecutableWithRuntime(type: Zip) {
