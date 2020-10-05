@@ -9,8 +9,8 @@ Triggers barcode 'reading' with hotkey event which can be configured.
 - Download the latest release and unzip the archive. 
 - Run `emulator.exe`.
 - Optionally, you can change settings.
-- Just go to the target place (standalone app, browser tab or any other) which you are going to test with barcode input
-- Press the hotkey
+- Just go to the target place (standalone app, browser tab or any other) which you are going to test with barcode input.
+- Press the hotkey.
 
 ## Screenshot
 ![Screenshot](docs/screenshot.png)
