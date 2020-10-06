@@ -45,7 +45,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
@@ -53,7 +55,8 @@ import java.util.stream.Stream;
 
 import static java.awt.event.KeyEvent.*;
 import static java.util.Collections.singletonList;
-import static oxcafedead.barcodereader.keybind.HotkeyBindManager.SpecialKey.*;
+import static oxcafedead.barcodereader.keybind.HotkeyBindManager.SpecialKey.ALT;
+import static oxcafedead.barcodereader.keybind.HotkeyBindManager.SpecialKey.CTRL;
 
 public class MainWindow extends JFrame {
 
@@ -84,17 +87,8 @@ public class MainWindow extends JFrame {
   int key = 'G';
 
   public MainWindow()
-      throws ClassNotFoundException, UnsupportedLookAndFeelException, InstantiationException,
-          IllegalAccessException {
-    this(true);
-  }
-
-  MainWindow(boolean show)
       throws HeadlessException, ClassNotFoundException, UnsupportedLookAndFeelException,
           InstantiationException, IllegalAccessException {
-    if (!show) {
-      return;
-    }
     GraphicsConfiguration graphicsConfiguration =
         GraphicsEnvironment.getLocalGraphicsEnvironment()
             .getDefaultScreenDevice()
@@ -162,7 +156,16 @@ public class MainWindow extends JFrame {
                       return;
                     }
 
-                    setHotkeys(keyCodeRecordings.toArray(new Integer[0]), true);
+                    buildHotkey(keyCodeRecordings.toArray(new Integer[0]))
+                        .ifPresent(
+                            hk -> {
+                              this.key = hk.key;
+                              this.specialKey = hk.specialKey;
+                              this.additionalSpecialKeys =
+                                  Arrays.asList(hk.additionalSpecialKeys.clone());
+                              keyCodeRecordings.clear();
+                              setHotkeyUiField(specialKey, additionalSpecialKeys, (char) key);
+                            });
                   }
                 });
     keyCodeChecker.setUncaughtExceptionHandler(new BugReporter(frame));
@@ -337,7 +340,7 @@ public class MainWindow extends JFrame {
         () -> Long.parseLong(delaySpinner.getValue().toString()));
   }
 
-  public void setHotkeys(Integer[] keyCodes, boolean updateUiField) {
+  public static Optional<HotKey> buildHotkey(Integer[] keyCodes) {
     HotkeyBindManager.SpecialKey specialKey = null;
     List<HotkeyBindManager.SpecialKey> additionalSpecialKeys = new ArrayList<>();
     int keyCode = 0;
@@ -353,25 +356,25 @@ public class MainWindow extends JFrame {
     for (int key : normalized) {
       boolean isLetter = key >= VK_A && key <= VK_Z;
       if (isLetter && keyCode != 0) {
-        return;
+        return Optional.empty();
       } else if (isLetter) {
         keyCode = key;
       } else if (specialKey == null) {
-        specialKey = getKeyType(key);
+        specialKey = Util.getKeyType(key);
       } else {
-        additionalSpecialKeys.add(getKeyType(key));
+        additionalSpecialKeys.add(Util.getKeyType(key));
       }
     }
 
     if (keyCode != 0 && specialKey != null) {
-      this.key = keyCode;
-      this.specialKey = specialKey;
-      this.additionalSpecialKeys = additionalSpecialKeys;
-      keyCodeRecordings.clear();
-      if (updateUiField) {
-        setHotkeyUiField(specialKey, additionalSpecialKeys, (char) keyCode);
-      }
+      return Optional.of(
+          new HotKey(
+              specialKey,
+              additionalSpecialKeys.toArray(new HotkeyBindManager.SpecialKey[0]),
+              keyCode));
     }
+
+    return Optional.empty();
   }
 
   private void setHotkeyUiField(
@@ -388,20 +391,5 @@ public class MainWindow extends JFrame {
 
   private String getDisplayName(HotkeyBindManager.SpecialKey specialKey) {
     return specialKey.name().charAt(0) + specialKey.name().substring(1).toLowerCase();
-  }
-
-  private HotkeyBindManager.SpecialKey getKeyType(Integer firstKeyCode) {
-    switch (firstKeyCode) {
-      case KeyEvent.VK_SHIFT:
-        return SHIFT;
-      case KeyEvent.VK_CONTROL:
-        return CTRL;
-      case KeyEvent.VK_WINDOWS:
-        return WIN;
-      case KeyEvent.VK_ALT:
-        return ALT;
-      default:
-        return null;
-    }
   }
 }
