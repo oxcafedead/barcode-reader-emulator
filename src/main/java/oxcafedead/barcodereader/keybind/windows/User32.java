@@ -1,4 +1,4 @@
-package keybind.windows;
+package oxcafedead.barcodereader.keybind.windows;
 
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;

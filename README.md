@@ -9,6 +9,8 @@ Triggers barcode 'reading' with hotkey event which can be configured.
 - Download the latest release and unzip the archive. 
 - Run `emulator.exe`.
 - Optionally, you can change settings.
+    - To change hotkey combination, just press hotkey field and type in the new combination. Keep in mind that lots of combinations are already bind and cannot be used.
+    - You can also parse an existing barcode on the screen by clicking on 'photo' button and capture a screen area with the barcode image. It will be automatically parsed and set to 'Value' field.
 - Just go to the target place (standalone app, browser tab or any other) which you are going to test with barcode input.
 - Press the hotkey.
 

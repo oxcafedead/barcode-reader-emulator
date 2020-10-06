@@ -1,6 +1,6 @@
-package keybind;
+package oxcafedead.barcodereader.keybind;
 
-import keybind.windows.HotkeyBindManagerWindowsAdaptor;
+import oxcafedead.barcodereader.keybind.windows.HotkeyBindManagerWindowsAdaptor;
 
 public enum HotkeyBindFactory {
   INSTANCE;

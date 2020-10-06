@@ -1,4 +1,4 @@
-package keybind;
+package oxcafedead.barcodereader.keybind;
 
 import java.util.Optional;
 

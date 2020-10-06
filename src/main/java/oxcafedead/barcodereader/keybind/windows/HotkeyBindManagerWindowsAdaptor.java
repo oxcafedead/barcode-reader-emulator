@@ -1,6 +1,6 @@
-package keybind.windows;
+package oxcafedead.barcodereader.keybind.windows;
 
-import keybind.HotkeyBindManager;
+import oxcafedead.barcodereader.keybind.HotkeyBindManager;
 
 import java.awt.event.KeyEvent;
 import java.util.Arrays;
@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Stream;
 
-import static keybind.windows.User32.*;
+import static oxcafedead.barcodereader.keybind.windows.User32.*;
 
 public class HotkeyBindManagerWindowsAdaptor implements HotkeyBindManager {
 
