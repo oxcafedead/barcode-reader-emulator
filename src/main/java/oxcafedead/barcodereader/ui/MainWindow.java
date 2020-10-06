@@ -68,9 +68,9 @@ public class MainWindow extends JFrame {
   public static final Integer DELAY_INCREMENT = 1;
 
   private Thread hotkeyListener;
-  private final JTextField barcodeField;
-  private final JSpinner delaySpinner;
-  private final JTextField hkField;
+  private JTextField barcodeField;
+  private JSpinner delaySpinner;
+  private JTextField hkField;
 
   private final List<Integer> keyCodeRecordings = new ArrayList<>();
 
@@ -92,6 +92,9 @@ public class MainWindow extends JFrame {
   MainWindow(boolean show)
       throws HeadlessException, ClassNotFoundException, UnsupportedLookAndFeelException,
           InstantiationException, IllegalAccessException {
+    if (!show) {
+      return;
+    }
     GraphicsConfiguration graphicsConfiguration =
         GraphicsEnvironment.getLocalGraphicsEnvironment()
             .getDefaultScreenDevice()
@@ -300,7 +303,7 @@ public class MainWindow extends JFrame {
 
     valueGroup.add(shot);
 
-    frame.setVisible(show);
+    frame.setVisible(true);
     frame.setLocation(
         (graphicsConfiguration.getBounds().width - WIDTH) / 2,
         (graphicsConfiguration.getBounds().height - HEIGHT) / 2);
