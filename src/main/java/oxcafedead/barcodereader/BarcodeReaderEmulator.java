@@ -7,7 +7,7 @@ public class BarcodeReaderEmulator {
 
   public static void main(String[] args) {
     try {
-      new MainWindow();
+      Thread.setDefaultUncaughtExceptionHandler(new BugReporter(new MainWindow()));
     } catch (Exception anyException) {
       anyException.printStackTrace();
       new BugReporter().uncaughtException(Thread.currentThread(), anyException);
