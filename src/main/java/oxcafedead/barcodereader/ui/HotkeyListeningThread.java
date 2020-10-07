@@ -10,7 +10,12 @@ import java.awt.Toolkit;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import static javax.swing.JOptionPane.showMessageDialog;
+
 class HotkeyListeningThread extends Thread {
+
+  private static final String COULD_NOT_BIND_HOTKEY_MSG = "Could not bind hotkey.";
 
   private final HotKey hotKey;
   private final Supplier<String> barcodeValueSupplier;
@@ -25,7 +30,20 @@ class HotkeyListeningThread extends Thread {
     this.barcodeValueSupplier = barcodeValueSupplier;
     this.keyDelaySupplier = keyDelaySupplier;
     this.setDaemon(true);
-    this.setUncaughtExceptionHandler(new BugReporter(frame));
+    this.setUncaughtExceptionHandler(
+        (thread, throwable) -> {
+          if (COULD_NOT_BIND_HOTKEY_MSG.equals(throwable.getMessage())) {
+            showMessageDialog(
+                frame,
+                "Could not bind this hotkey."
+                    + "\nIt may be already globally used by some app or just reserved by operating system."
+                    + "\nPlease try another one.",
+                "Error",
+                ERROR_MESSAGE);
+          } else {
+            new BugReporter(frame).uncaughtException(thread, throwable);
+          }
+        });
   }
 
   @Override
@@ -34,7 +52,7 @@ class HotkeyListeningThread extends Thread {
     Optional<Integer> bindId =
         hotkeyBinder.bindKey(hotKey.key, hotKey.specialKey, hotKey.additionalSpecialKeys);
     if (bindId.isEmpty()) {
-      throw new IllegalStateException("Could not bind hotkey.");
+      throw new IllegalStateException(COULD_NOT_BIND_HOTKEY_MSG);
     }
 
     final Robot robot;

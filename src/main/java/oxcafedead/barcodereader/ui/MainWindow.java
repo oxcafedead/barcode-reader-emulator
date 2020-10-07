@@ -8,7 +8,6 @@ import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
@@ -54,6 +53,7 @@ import java.util.stream.Stream;
 
 import static java.awt.event.KeyEvent.*;
 import static java.util.Collections.singletonList;
+import static javax.swing.JOptionPane.showMessageDialog;
 import static oxcafedead.barcodereader.keybind.HotkeyBindManager.SpecialKey.ALT;
 import static oxcafedead.barcodereader.keybind.HotkeyBindManager.SpecialKey.CTRL;
 
@@ -290,9 +290,10 @@ public class MainWindow extends JFrame {
                           } catch (IOException ioe) {
                             new BugReporter(frame).uncaughtException(Thread.currentThread(), ioe);
                           } catch (BarcodeDecoder.BarcodeDecodingException barcodeError) {
-                            JOptionPane.showMessageDialog(
+                            showMessageDialog(
                                 frame,
-                                "Barcode could not be read! Please try again (maybe try to zoom in a bit).");
+                                "Cannot decode barcode."
+                                    + "\nPlease try again (maybe try to zoom in a bit).");
                           }
                         }
                       });
