@@ -20,11 +20,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.font.TextAttribute;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class BugReporter implements Thread.UncaughtExceptionHandler {
 
@@ -77,14 +77,10 @@ public class BugReporter implements Thread.UncaughtExceptionHandler {
     linkBtn.setFont(boldUnderline);
     exceptionDlg.add(linkBtn);
 
-    var stacktraceArea =
-        new JTextArea(
-            Stream.concat(
-                    Stream.of(throwable.getClass() + ": " + throwable.getMessage()),
-                    Stream.of(throwable.getStackTrace()).map(StackTraceElement::toString))
-                .collect(Collectors.joining("\n")),
-            10,
-            90);
+    final var stringWriter = new StringWriter();
+    throwable.printStackTrace(new PrintWriter(stringWriter));
+
+    var stacktraceArea = new JTextArea(stringWriter.getBuffer().toString(), 10, 90);
     stacktraceArea.setEditable(false);
     var scroll = new JScrollPane(stacktraceArea);
     exceptionDlg.add(scroll);
