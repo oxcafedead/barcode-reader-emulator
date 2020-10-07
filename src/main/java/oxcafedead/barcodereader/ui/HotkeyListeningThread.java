@@ -1,7 +1,7 @@
 package oxcafedead.barcodereader.ui;
 
-import oxcafedead.barcodereader.keybind.HotkeyBindManager;
 import oxcafedead.barcodereader.keybind.HotkeyBindFactory;
+import oxcafedead.barcodereader.keybind.HotkeyBindManager;
 
 import javax.swing.JFrame;
 import java.awt.AWTException;
@@ -17,10 +17,10 @@ class HotkeyListeningThread extends Thread {
   private final Supplier<Long> keyDelaySupplier;
 
   public HotkeyListeningThread(
-          JFrame frame,
-          HotKey hotKey,
-          Supplier<String> barcodeValueSupplier,
-          Supplier<Long> keyDelaySupplier) {
+      JFrame frame,
+      HotKey hotKey,
+      Supplier<String> barcodeValueSupplier,
+      Supplier<Long> keyDelaySupplier) {
     this.hotKey = hotKey;
     this.barcodeValueSupplier = barcodeValueSupplier;
     this.keyDelaySupplier = keyDelaySupplier;
@@ -50,6 +50,14 @@ class HotkeyListeningThread extends Thread {
   }
 
   private void emulateBarCodeRead(Robot robot) {
+    try {
+      // wait initially for some time not to mess hotkey and barcode input
+      Thread.sleep(150);
+    } catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+      return;
+    }
+
     barcodeValueSupplier
         .get()
         .chars()
