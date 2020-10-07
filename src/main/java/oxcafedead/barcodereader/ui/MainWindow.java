@@ -5,7 +5,6 @@ import oxcafedead.barcodereader.keybind.HotkeyBindManager;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -71,9 +70,9 @@ public class MainWindow extends JFrame {
   public static final Integer DELAY_INCREMENT = 1;
 
   private Thread hotkeyListener;
-  private JTextField barcodeField;
-  private JSpinner delaySpinner;
-  private JTextField hkField;
+  private final JTextField barcodeField;
+  private final JSpinner delaySpinner;
+  private final JTextField hkField;
 
   private final List<Integer> keyCodeRecordings = new ArrayList<>();
 
@@ -269,6 +268,10 @@ public class MainWindow extends JFrame {
                           screenshotFrame.setVisible(false);
                           screenshotFrame.dispose();
 
+                          if (screenEnd.x == screenStart.x || screenEnd.y == screenStart.y) {
+                            return;
+                          }
+
                           try {
                             final var cropped =
                                 screenShotImg.getSubimage(
@@ -278,16 +281,15 @@ public class MainWindow extends JFrame {
                                     Math.abs(screenEnd.y - screenStart.y));
                             final var byteArrayOutputStream = new ByteArrayOutputStream();
                             ImageIO.write(cropped, "jpeg", byteArrayOutputStream);
-                            final var barcodeInfo =
+                            final var barcode =
                                 new BarcodeDecoder()
                                     .decodeImage(
                                         new ByteArrayInputStream(
                                             byteArrayOutputStream.toByteArray()));
-                            barcodeField.setText(barcodeInfo.getText());
+                            barcodeField.setText(barcode);
                           } catch (IOException ioe) {
                             new BugReporter(frame).uncaughtException(Thread.currentThread(), ioe);
                           } catch (BarcodeDecoder.BarcodeDecodingException barcodeError) {
-                            final var jDialog = new JDialog(frame);
                             JOptionPane.showMessageDialog(
                                 frame,
                                 "Barcode could not be read! Please try again (maybe try to zoom in a bit).");

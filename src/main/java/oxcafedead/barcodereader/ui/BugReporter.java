@@ -4,6 +4,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import java.awt.Color;
@@ -28,7 +29,7 @@ import java.util.stream.Stream;
 public class BugReporter implements Thread.UncaughtExceptionHandler {
 
   private static final int WIDTH = 500;
-  private static final int HEIGHT = 300;
+  private static final int HEIGHT = 280;
 
   private static final String REPORT_TO_GITHUB_URL =
       "https://github.com/oxcafedead/barcode-reader-emulator/issues/new";
@@ -83,9 +84,10 @@ public class BugReporter implements Thread.UncaughtExceptionHandler {
                     Stream.of(throwable.getStackTrace()).map(StackTraceElement::toString))
                 .collect(Collectors.joining("\n")),
             10,
-            65);
+            90);
     stacktraceArea.setEditable(false);
-    exceptionDlg.add(stacktraceArea);
+    var scroll = new JScrollPane(stacktraceArea);
+    exceptionDlg.add(scroll);
 
     var okBtn = new JButton("OK");
     okBtn.addActionListener(e -> exceptionDlg.dispose());

@@ -12,15 +12,13 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class BarcodeDecoder {
-  public BarcodeInfo decodeImage(InputStream inputStream) throws BarcodeDecodingException {
+  public String decodeImage(InputStream inputStream) throws BarcodeDecodingException {
     try {
       BinaryBitmap bitmap =
           new BinaryBitmap(
               new HybridBinarizer(new BufferedImageLuminanceSource(ImageIO.read(inputStream))));
-      if (bitmap.getWidth() < bitmap.getHeight()) {
-        if (bitmap.isRotateSupported()) {
-          bitmap = bitmap.rotateCounterClockwise();
-        }
+      if (bitmap.getWidth() < bitmap.getHeight() && bitmap.isRotateSupported()) {
+        bitmap = bitmap.rotateCounterClockwise();
       }
       return decode(bitmap);
     } catch (IOException e) {
@@ -28,31 +26,13 @@ public class BarcodeDecoder {
     }
   }
 
-  private BarcodeInfo decode(BinaryBitmap bitmap) throws BarcodeDecodingException {
+  private String decode(BinaryBitmap bitmap) throws BarcodeDecodingException {
     Reader reader = new MultiFormatReader();
     try {
       Result result = reader.decode(bitmap);
-      return new BarcodeInfo(result.getText(), result.getBarcodeFormat().toString());
+      return result.getText();
     } catch (Exception e) {
       throw new BarcodeDecodingException(e);
-    }
-  }
-
-  public static class BarcodeInfo {
-    private final String text;
-    private final String format;
-
-    BarcodeInfo(String text, String format) {
-      this.text = text;
-      this.format = format;
-    }
-
-    public String getText() {
-      return text;
-    }
-
-    public String getFormat() {
-      return format;
     }
   }
 
