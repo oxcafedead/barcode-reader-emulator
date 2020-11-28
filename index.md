@@ -1,5 +1,4 @@
-A simple desktop app. Behaves like a real barcode reader device, but doesn't require buying anything ☺️
-
+A simple desktop app. Behaves like a real barcode reader device, but doesn't require buying anything ☺️\
 Triggers barcode 'reading' event with after pressing some hotkey (you configure preferred hotkey yourself).
 
 ## Usage
