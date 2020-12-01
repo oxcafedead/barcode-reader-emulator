@@ -1,4 +1,5 @@
-# Barcode reader emulator
+# [Barcode Reader Emulator][<img src="https://github.com/oxcafedead/barcode-reader-emulator/raw/main/docs/barcode-emulator-logo.png">](https://oxcafedead.github.io/barcode-reader-emulator/)
+
 [![Build Status](https://travis-ci.org/oxcafedead/barcode-reader-emulator.svg?branch=main)](https://travis-ci.org/oxcafedead/barcode-reader-emulator)
 
 A Java 11 Windows desktop app. Emulates barcode reader device (which behaves like a keyboard).
