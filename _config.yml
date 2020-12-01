@@ -3,3 +3,4 @@ logo: https://raw.githubusercontent.com/oxcafedead/barcode-reader-emulator/main/
 theme: jekyll-theme-minimal
 show_downloads: true
 version: 0.4.0
+site.github.zip_url: https://github.com/oxcafedead/barcode-reader-emulator/releases/download/0.4.0/emulator.zip
