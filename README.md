@@ -21,7 +21,6 @@ Triggers barcode 'reading' with a hotkey event which can be configured.
 ## Known issues/limitations
 
 The list of characters supported for now (as generally the majority of barcode scanners support only basic characters):
-\`
 
 | Characters  |
 | ------------- |
