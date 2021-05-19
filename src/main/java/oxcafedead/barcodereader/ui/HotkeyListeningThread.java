@@ -1,5 +1,7 @@
 package oxcafedead.barcodereader.ui;
 
+import oxcafedead.barcodereader.encode.KeyEncoder;
+import oxcafedead.barcodereader.encode.KeyEncoderFactory;
 import oxcafedead.barcodereader.keybind.HotkeyBindFactory;
 import oxcafedead.barcodereader.keybind.HotkeyBindManager;
 
@@ -61,13 +63,14 @@ class HotkeyListeningThread extends Thread {
     } catch (AWTException e) {
       throw new IllegalStateException(e);
     }
+    KeyEncoder keyEncoder = KeyEncoderFactory.INSTANCE.getKeyEncoder(robot);
 
-    hotkeyBinder.listen(() -> emulateBarCodeRead(robot));
+    hotkeyBinder.listen(() -> emulateBarCodeRead(keyEncoder));
 
     hotkeyBinder.unbindKey(bindId.get());
   }
 
-  private void emulateBarCodeRead(Robot robot) {
+  private void emulateBarCodeRead(KeyEncoder keyEncoder) {
     try {
       // wait initially for some time not to mess hotkey and barcode input
       Thread.sleep(150);
@@ -87,7 +90,7 @@ class HotkeyListeningThread extends Thread {
                 Thread.currentThread().interrupt();
                 return;
               }
-              robot.keyPress(keycode);
+              keyEncoder.encode(keycode);
             });
     Toolkit.getDefaultToolkit().beep();
   }
