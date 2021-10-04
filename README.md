@@ -27,6 +27,6 @@ The list of characters supported for now (as generally the majority of barcode s
 | 0-9  |
 | a-z  |
 | A-Z  |
-| \`~!@#$%^&*()_+-=\\&sol;;',./:"<>? |
+| \`~!@#$%^&*()_+-=&sol;;',.&bsol;:"<>? |
 
 Also, the _US keyboard layout_ should be used (switch to it in the settings).
