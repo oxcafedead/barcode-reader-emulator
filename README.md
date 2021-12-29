@@ -1,6 +1,7 @@
 # [<img src="https://github.com/oxcafedead/barcode-reader-emulator/raw/main/docs/barcode-emulator-logo.png">](https://oxcafedead.github.io/barcode-reader-emulator/)
 
 [![Build Status](https://travis-ci.org/oxcafedead/barcode-reader-emulator.svg?branch=main)](https://travis-ci.org/oxcafedead/barcode-reader-emulator)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=oxcafedead_barcode-reader-emulator&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=oxcafedead_barcode-reader-emulator)
 
 A Java 11 Windows desktop app. Emulates a barcode reader device (which behaves like a keyboard).
 Triggers barcode 'reading' with a hotkey event which can be configured.
