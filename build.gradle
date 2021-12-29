@@ -2,6 +2,8 @@ plugins {
     id 'java'
     id 'org.beryx.runtime' version '1.11.4'
     id 'edu.sc.seis.launch4j' version '2.4.6'
+    id "org.sonarqube" version "3.3"
+    id "jacoco"
 }
 
 runtime {
@@ -43,3 +45,27 @@ task zipExecutableWithRuntime(type: Zip) {
     archiveName "emulator.zip"
     destinationDir(file("${buildDir}/distr"))
 }
+
+jacoco {
+    toolVersion = "0.8.7"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled true
+        csv.enabled false
+    }
+
+    dependsOn test
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "oxcafedead_barcode-reader-emulator"
+        property "sonar.organization", "oxcafedead"
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
+}
+
+project.tasks["sonarqube"].dependsOn ":jacocoTestReport"
