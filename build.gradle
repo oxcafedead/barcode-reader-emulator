@@ -1,19 +1,22 @@
 plugins {
     id 'java'
     id 'org.beryx.runtime' version '1.11.4'
-    id 'edu.sc.seis.launch4j' version '2.4.6'
+    id 'edu.sc.seis.launch4j' version '2.5.2'
     id "org.sonarqube" version "3.3"
     id "jacoco"
 }
 
-runtime {
-    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
-    modules = ['java.se', 'java.desktop', 'java.logging']
-    imageDir = file("${buildDir}/launch4j/runtime")
-}
+sourceCompatibility = '11'
+targetCompatibility = '11'
 
 group 'oxcafedead'
 version '0.4.1'
+
+runtime {
+    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
+    modules = ['java.desktop']
+    imageDir = file("${buildDir}/launch4j/runtime")
+}
 
 repositories {
     mavenCentral()
@@ -27,16 +30,21 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:1.9.5'
 }
 
-launch4j {
+createExe {
     mainClassName = 'oxcafedead.barcodereader.BarcodeReaderEmulator'
     icon = "${projectDir}/app.ico"
-    bundledJrePath = 'runtime'
-    bundledJre64Bit = true
+    jreMinVersion = "11"
     jar = "${buildDir}/libs/${project.name}-${project.version}.jar"
     restartOnCrash = false
+    downloadUrl = "https://adoptium.net/?variant=openjdk17"
 }
 
 task zipExecutableWithRuntime(type: Zip) {
+    tasks.createExe.configure {
+        bundledJrePath = null
+        bundledJre64Bit = false
+        bundledJreAsFallback = false
+    }
     dependsOn tasks.runtime
     dependsOn tasks.createExe
     from "${buildDir}/launch4j/"
@@ -44,6 +52,20 @@ task zipExecutableWithRuntime(type: Zip) {
     include '**/*'
     archiveName "emulator.zip"
     destinationDir(file("${buildDir}/distr"))
+}
+
+task zipExecutable(type: Zip) {
+    tasks.createExe.configure {
+        bundledJrePath = 'runtime'
+        bundledJre64Bit = true
+        bundledJreAsFallback = true
+    }
+    dependsOn tasks.createExe
+    from "${buildDir}/launch4j/"
+    include '*'
+    include '**/*'
+    archiveName "emulator-no-runtime.zip"
+    destinationDir(file("${buildDir}/distr-no-runtime"))
 }
 
 jacoco {
