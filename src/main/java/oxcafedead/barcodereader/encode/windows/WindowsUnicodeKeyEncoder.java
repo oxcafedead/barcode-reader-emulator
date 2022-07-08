@@ -3,6 +3,8 @@ package oxcafedead.barcodereader.encode.windows;
 import oxcafedead.barcodereader.encode.KeyEncoder;
 
 import java.awt.Robot;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static java.awt.event.KeyEvent.*;
 
@@ -83,7 +85,7 @@ public class WindowsUnicodeKeyEncoder implements KeyEncoder {
       robot.keyRelease(VK_SHIFT);
       return;
     }
-
-    System.err.println("Key code " + keyCode + " is not supported");
+    Logger.getAnonymousLogger()
+        .log(Level.WARNING, () -> "Key code " + keyCode + " is not supported");
   }
 }

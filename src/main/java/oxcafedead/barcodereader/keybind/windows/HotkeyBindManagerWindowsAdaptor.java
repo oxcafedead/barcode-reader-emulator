@@ -20,13 +20,15 @@ public class HotkeyBindManagerWindowsAdaptor implements HotkeyBindManager {
           SpecialKey.SHIFT, 0x0004,
           SpecialKey.WIN, 0x0008);
 
+  private static final Random RANDOM = new Random();
+
   @Override
   public Optional<Integer> bindKey(
       int keyCode, SpecialKey specialKey, SpecialKey... additionalSpecialKeys) {
     if (keyCode > KeyEvent.VK_Z || keyCode < KeyEvent.VK_A) {
       throw new IllegalArgumentException("Incorrect key code. Key code should be from 'A' to 'Z'.");
     }
-    int bindId = Math.abs(new Random().nextInt());
+    int bindId = RANDOM.nextInt();
     int fsModifiers =
         Stream.concat(Stream.of(specialKey), Arrays.stream(additionalSpecialKeys))
             .mapToInt(SPECIAL_KEY_CODES::get)
@@ -42,6 +44,7 @@ public class HotkeyBindManagerWindowsAdaptor implements HotkeyBindManager {
   }
 
   @Override
+  @SuppressWarnings("java:S2189") // exit is designed via interrupt
   public void listen(Runnable callback) {
     MSG msg = new MSG();
     while (true) {
