@@ -33,10 +33,16 @@ func main() {
 		})
 	}() // listen in bg, non-blocking the main GUI thread
 
+	ico, err := walk.NewIconFromFile("app.ico")
+	if err != nil {
+		panic("could not load icon")
+	}
+
 	MainWindow{
 		AssignTo: &mainWnd,
 		Title:    "Barcode Reader Emulator",
 		Size:     Size{Width: 350, Height: 135},
+		Icon:     ico,
 		Layout:   VBox{},
 		Children: []Widget{
 			HSplitter{

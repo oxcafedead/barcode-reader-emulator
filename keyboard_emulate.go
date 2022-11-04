@@ -7,6 +7,8 @@ import (
 	"github.com/micmonay/keybd_event"
 )
 
+// Emulates keyboard signals for a given test string. Only basic symbols are supported,
+// such as upper/lowercase English letters, numbers and basic special symbols such as !,@,# etc.
 func EmulateTyping(text string, delayBetweenKeys int) {
 	for _, v := range text {
 

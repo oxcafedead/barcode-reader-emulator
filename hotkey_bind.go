@@ -9,21 +9,7 @@ import (
 
 var bindingChan = make(chan *hotkey.Hotkey, 1)
 
-func InitDefaultBinding() (string, error) {
-	const defBindKey = hotkey.KeyQ
-	var defBindMods = []hotkey.Modifier{hotkey.ModCtrl, hotkey.ModAlt}
-	initialBinding := hotkey.New(defBindMods, defBindKey)
-	err := initialBinding.Register()
-	if err != nil {
-		return "", err
-	}
-	var defHotkeyLabel = "n/a"
-
-	bindingChan <- initialBinding
-	defHotkeyLabel = bindingToLabel(defBindMods, defBindKey)
-	return defHotkeyLabel, nil
-}
-
+// Listen for the already bind hotkey event. Blocks the calling thread.
 func ListenForHotkey(actionCallback func()) {
 	binding := <-bindingChan
 	for {
@@ -50,6 +36,7 @@ func ListenForHotkey(actionCallback func()) {
 	}
 }
 
+// Creates a new binding for a hotkey with optional modifiers
 func SetNewBinding(modifierIndexes []int, keyIndex int) (string, error) {
 	var hkMods = make([]hotkey.Modifier, len(modifierIndexes))
 	for i, selectedIdx := range modifierIndexes {
@@ -66,8 +53,10 @@ func SetNewBinding(modifierIndexes []int, keyIndex int) (string, error) {
 	return bindingToLabel(hkMods, key), nil
 }
 
+// All possible modifiers for a hotkey binding
 var AllModifiers = []hotkey.Modifier{hotkey.ModCtrl, hotkey.ModAlt, hotkey.ModWin, hotkey.ModShift}
 
+// All possible hotkeys for a binding
 var AllHotkeys = []hotkey.Key{
 	hotkey.Key0,
 	hotkey.Key1,
