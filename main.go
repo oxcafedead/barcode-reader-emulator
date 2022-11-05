@@ -33,7 +33,7 @@ func main() {
 		})
 	}() // listen in bg, non-blocking the main GUI thread
 
-	ico, err := walk.NewIconFromFile("app.ico")
+	ico, err := walk.NewIconFromResourceId(2) // icon id from manifest
 	if err != nil {
 		panic("could not load icon")
 	}
