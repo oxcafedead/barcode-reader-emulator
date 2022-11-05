@@ -40,7 +40,10 @@
 
         {% if site.show_downloads %}
         <ul class="downloads" style="height: 50px;">
-          <li style="width:100%;height: 50px;border-right:0"><a href="{{ site.github.zip_url }}" onclick="mixpanel.track('Download')">Download (v{{ site.version }})<strong>ZIP File</strong><img src="https://github.com/oxcafedead/barcode-reader-emulator/raw/gh-pages/Windows_logo_and_wordmark_-_2012.png" style="width:50px;padding-top: 5px;"></a></li>
+          <li style="width:100%;height: 50px;border-right:0"><a href="{{ site.github.zip_url }}" onclick="mixpanel.track('Download')">Download (v{{ site.version }})<strong>ZIP 43.7 MB</strong><img src="https://github.com/oxcafedead/barcode-reader-emulator/raw/gh-pages/Windows_logo_and_wordmark_-_2012.png" style="width:50px;padding-top: 5px;"></a></li>
+        </ul>
+        <ul class="downloads" style="height: 50px;background: #cde6e4;">
+          <li style="width:100%;height: 50px;border-right:0"><a href="{{ site.github.exe_url }}" onclick="mixpanel.track('Download')">Download (v{{ site.exe_version }})<strong>EXE 7.75 MB</strong><img src="https://github.com/oxcafedead/barcode-reader-emulator/raw/gh-pages/Windows_logo_and_wordmark_-_2012.png" style="width:50px;padding-top: 5px;"></a></li>
         </ul>
         {% endif %}
       </header>
