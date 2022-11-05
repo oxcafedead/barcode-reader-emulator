@@ -85,7 +85,7 @@ func main() {
 								modLabels[i] = modifierToString(AllModifiers[i])
 							}
 							hotkeyLabels := make([]string, len(AllHotkeys))
-							for i := 0; i < len(AllModifiers); i++ {
+							for i := 0; i < len(AllHotkeys); i++ {
 								hotkeyLabels[i] = hotkeyToString(AllHotkeys[i])
 							}
 

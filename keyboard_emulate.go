@@ -159,6 +159,6 @@ func translateToKeybd(s rune) (int, bool) {
 	case '?':
 		return keybd_event.VK_OEM_2, true
 	default:
-		panic("unexpected rune " + string(s))
+		return keybd_event.VK_OEM_2, true // ? symbol for any unsupported rune
 	}
 }
