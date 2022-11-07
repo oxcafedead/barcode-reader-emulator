@@ -6,6 +6,7 @@ import (
 	"github.com/kbinani/screenshot"
 	"github.com/makiuchi-d/gozxing"
 	"github.com/makiuchi-d/gozxing/oned"
+	"github.com/makiuchi-d/gozxing/qrcode"
 )
 
 // Scans the screen (all available) if it contains any supported barcode and tries to decode it.
@@ -46,6 +47,11 @@ func ScanScreenBarcode() (string, error) {
 			return result.GetText(), nil
 		}
 		reader = oned.NewMultiFormatUPCEANReader(hints)
+		result, err = reader.Decode(bmp, hints)
+		if err == nil {
+			return result.GetText(), nil
+		}
+		reader = qrcode.NewQRCodeReader()
 		result, err = reader.Decode(bmp, hints)
 		if err == nil {
 			return result.GetText(), nil
