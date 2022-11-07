@@ -8,6 +8,8 @@ import (
 	"github.com/makiuchi-d/gozxing/oned"
 )
 
+// Scans the screen (all available) if it contains any supported barcode and tries to decode it.
+// Returns a successfully decoded barcode value or an error.
 func ScanScreenBarcode() (string, error) {
 	n := screenshot.NumActiveDisplays()
 
