@@ -3,5 +3,6 @@ logo: https://raw.githubusercontent.com/oxcafedead/barcode-reader-emulator/main/
 theme: jekyll-theme-minimal
 show_downloads: true
 version: 2.0.0-alpha
+display_donate: true
 github:
   url: https://github.com/oxcafedead/barcode-reader-emulator/releases/download/2.0.0-alpha/barcode-emulator.exe
