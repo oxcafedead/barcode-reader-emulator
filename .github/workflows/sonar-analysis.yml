@@ -21,6 +21,7 @@ jobs:
       with:
         args: >
           -Dsonar.projectKey=oxcafedead_barcode-reader-emulator
+          -Dsonar.organization=oxcafedead
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
