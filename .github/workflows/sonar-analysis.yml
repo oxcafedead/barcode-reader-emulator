@@ -20,7 +20,7 @@ jobs:
     - run: go install
     - run: go build
     - run: go test -json > test-report.out
-    - run: go test -coverprofile=coverage.out
+    - run: go test -coverprofile='coverage.out'
     - name: SonarQube Scan
       uses: sonarsource/sonarqube-scan-action@master
       with:
