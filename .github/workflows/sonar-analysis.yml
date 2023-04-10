@@ -17,6 +17,7 @@ jobs:
         # Disabling shallow clone is recommended for improving relevancy of reporting
         fetch-depth: 0
     - uses: actions/setup-go@v4
+    - run: go build
     - run: go test -json > test-report.out
     - run: go test -coverprofile=coverage.out
     - name: SonarQube Scan
