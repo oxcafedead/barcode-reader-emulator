@@ -1,6 +1,6 @@
 # [<img src="https://github.com/oxcafedead/barcode-reader-emulator/raw/main/docs/barcode-emulator-logo.png">](https://oxcafedead.github.io/barcode-reader-emulator/)
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=oxcafedead_barcode-reader-emulator&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=oxcafedead_barcode-reader-emulator)
+[![Build Status](https://github.com/oxcafedead/barcode-reader-emulator/actions/workflows/build.yml/badge.svg?branch=golang-alpha)](https://github.com/oxcafedead/barcode-reader-emulator/actions/workflows/build.yml)
 
 A standalone Windows desktop app. Emulates a barcode reader device (which behaves like a keyboard). Triggers barcode 'reading' with a hotkey event which can be configured.
 
