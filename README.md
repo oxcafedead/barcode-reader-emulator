@@ -30,6 +30,9 @@ Also, the _US keyboard layout_ should be used (switch to it in the settings).
 
 Only Windows operating system is supported for now.
 
+## Support
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/vozhdaenko)
+
 ## Build
 First, install Go.
 Then install all dependencies, do:
