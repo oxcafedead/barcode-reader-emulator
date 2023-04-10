@@ -1,12 +1,10 @@
 # [<img src="https://github.com/oxcafedead/barcode-reader-emulator/raw/main/docs/barcode-emulator-logo.png">](https://oxcafedead.github.io/barcode-reader-emulator/)
 
-[![Build Status](https://github.com/oxcafedead/barcode-reader-emulator/actions/workflows/build.yml/badge.svg?branch=golang-alpha)](https://github.com/oxcafedead/barcode-reader-emulator/actions/workflows/build.yml)
-
 A standalone Windows desktop app. Emulates a barcode reader device (which behaves like a keyboard). Triggers barcode 'reading' with a hotkey event which can be configured.
 
 ## Usage
 
-- Download the executable in the latest release archive. 
+- Download the executable in the latest [release](https://github.com/oxcafedead/barcode-reader-emulator/releases). 
 - Run it.
 - Optionally, you can change the settings.
     - To change a hotkey combination, just click on the "Change" button near Hotkey field. Select keys for the new combination (multi-selection is supported for special keys). Keep in mind that some combinations are already bind in the system and cannot be used.
@@ -38,11 +36,9 @@ Then install all dependencies, do:
 ```cmd
 go install
 go install github.com/akavel/rsrc
+staticcheck
 ```
 Then run
 ```
 .\build.bat
 ```
-
-## Work in progress
-The work has not finished, however the app binary is available to download
