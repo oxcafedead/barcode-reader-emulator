@@ -1,5 +1,4 @@
-A simple desktop app. Behaves like a real barcode reader device, but doesn't require buying anything ☺️\
-Triggers a barcode 'reading' event after pressing some hotkey (you configure preferred hotkey yourself).
+A standalone Windows desktop app. Emulates a barcode reader device (which behaves like a keyboard). Triggers barcode 'reading' with a hotkey event which can be configured.
 
 ## Usage
 

@@ -1,9 +1,7 @@
 title: Barcode Reader Emulator
-logo: https://raw.githubusercontent.com/oxcafedead/barcode-reader-emulator/main/docs/screenshot.png
+logo: https://raw.githubusercontent.com/oxcafedead/barcode-reader-emulator/main/docs/screenshot.jpg
 theme: jekyll-theme-minimal
 show_downloads: true
-version: 0.4.1
-exe_version: 2.0.0-alpha
+version: 2.0.0-alpha
 github:
-  zip_url: https://github.com/oxcafedead/barcode-reader-emulator/releases/download/0.4.1/emulator.zip
-  exe_url: https://github.com/oxcafedead/barcode-reader-emulator/releases/download/2.0.0-alpha/barcode-emulator.exe
+  url: https://github.com/oxcafedead/barcode-reader-emulator/releases/download/2.0.0-alpha/barcode-emulator.exe
