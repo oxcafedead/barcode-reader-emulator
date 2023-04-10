@@ -37,6 +37,7 @@ Then install all dependencies, do:
 go install
 go install github.com/akavel/rsrc
 staticcheck
+go test
 ```
 Then run
 ```
