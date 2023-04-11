@@ -38,7 +38,6 @@ First, install Go.
 Then install all dependencies, do:
 ```cmd
 go install
-go install github.com/akavel/rsrc
 staticcheck
 go test
 ```
