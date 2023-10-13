@@ -9,7 +9,7 @@ import (
 
 // Emulates keyboard signals for a given test string. Only basic symbols are supported,
 // such as upper/lowercase English letters, numbers and basic special symbols such as !,@,# etc.
-func EmulateTyping(text string, delayBetweenKeys int) {
+func EmulateTyping(text string, delayBetweenKeys int, sendEnter bool) {
 	for _, v := range text {
 
 		kb, err := keybd_event.NewKeyBonding()
@@ -33,6 +33,22 @@ func EmulateTyping(text string, delayBetweenKeys int) {
 
 		kb.Clear()
 		time.Sleep(time.Millisecond * time.Duration(delayBetweenKeys))
+	}
+	if sendEnter {
+		kb, err := keybd_event.NewKeyBonding()
+		if err != nil {
+			panic(err)
+		}
+	
+		kb.SetKeys(keybd_event.VK_ENTER)
+		err = kb.Press()
+		if err != nil {
+			panic(err)
+		}
+		err = kb.Release()
+		if err != nil {
+			panic(err)
+		}
 	}
 }
 

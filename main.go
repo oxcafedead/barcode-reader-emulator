@@ -13,6 +13,7 @@ func main() {
 	var hotkeyLabel *walk.Label
 	var slider *walk.Slider
 	var mainWnd *walk.MainWindow
+	var sendEnter *walk.CheckBox
 
 	defaultBinding, err := SetNewBinding([]int{0, 1}, 10)
 	if err != nil {
@@ -29,7 +30,7 @@ func main() {
 			}
 			beeep.Beep(beeep.DefaultFreq*2, beeep.DefaultDuration/4) // emulate scanner sound :)
 
-			EmulateTyping(valueToWrite, slider.Value())
+			EmulateTyping(valueToWrite, slider.Value(), sendEnter.CheckState() == walk.CheckChecked)
 		})
 	}() // listen in bg, non-blocking the main GUI thread
 
@@ -121,11 +122,16 @@ func main() {
 						},
 					},
 				},
-			},
+			}, 
 			HSplitter{
 				Children: []Widget{
 					Label{Text: "Input Key Delay"},
 					Slider{AssignTo: &slider, MinValue: 10, MaxValue: 100},
+					CheckBox{ 
+						Text: "Send ENTER at the end", 
+						AssignTo: &sendEnter,
+						MinSize: Size{Width: 40, Height: 20},
+					},		
 				},
 			},
 		},
