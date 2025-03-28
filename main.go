@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"os"
 	"time"
 
@@ -16,11 +15,14 @@ func main() {
 	valueFlag := flag.String("value", "", "The barcode value to emulate typing")
 	delayFlag := flag.Int("delay", 50, "Input key delay in milliseconds")
 	sendEnterFlag := flag.Bool("sendEnter", false, "Send ENTER key at the end of the input")
+	beepFlag := flag.Bool("beep", true, "Enable or disable beep sound")
 	flag.Parse()
 
 	// If command-line flags are provided, handle them and exit
 	if *valueFlag != "" {
-		fmt.Println("Emulating barcode input...")
+		if *beepFlag {
+			beeep.Beep(beeep.DefaultFreq*2, beeep.DefaultDuration/4) // emulate scanner sound :)
+		}
 		EmulateTyping(*valueFlag, *delayFlag, *sendEnterFlag)
 		os.Exit(0)
 	}

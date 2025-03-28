@@ -17,7 +17,7 @@ A standalone Windows desktop app. Emulates a barcode reader device (which behave
 ### To use the program from the command line:
 
 ```
-barcode-reader-emulator.exe -value "123456" -delay 50 -sendEnter
+barcode-reader-emulator.exe -value "123456" -delay 50 -sendEnter -beep=false
 ```
 
 ## Screenshot
