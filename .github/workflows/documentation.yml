@@ -35,13 +35,13 @@ jobs:
         uses: actions/configure-pages@v3
       - name: Generate docs
         run:  |
-          wget https://github.com/oxcafedead/empedoc/releases/download/v0.1.4/empedoc-linux-amd64
+          wget https://github.com/oxcafedead/empedoc/releases/download/v1.0.0/empedoc-linux-amd64
           chmod +x empedoc-linux-amd64
           ./empedoc-linux-amd64
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: './docs_gen'
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
