@@ -14,6 +14,12 @@ Standalone Windows desktop app that emulates a barcode-reader device (acts like 
 - Go to the target application (standalone app, browser tab, or any other place) where you want to test barcode input.
 - Press the hotkey.
 
+### To use the program from the command line:
+
+```
+barcode-reader-emulator.exe -value "123456" -delay 50 -sendEnter -beep=false
+```
+
 ## Screenshot
 ![Screenshot](docs/screenshot.jpg)
 

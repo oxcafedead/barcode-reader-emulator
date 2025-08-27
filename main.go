@@ -1,6 +1,8 @@
 package main
 
 import (
+	"flag"
+	"os"
 	"time"
 
 	"github.com/gen2brain/beeep"
@@ -9,6 +11,23 @@ import (
 )
 
 func main() {
+	// Define command-line flags
+	valueFlag := flag.String("value", "", "The barcode value to emulate typing")
+	delayFlag := flag.Int("delay", 50, "Input key delay in milliseconds")
+	sendEnterFlag := flag.Bool("sendEnter", false, "Send ENTER key at the end of the input")
+	beepFlag := flag.Bool("beep", true, "Enable or disable beep sound")
+	flag.Parse()
+
+	// If command-line flags are provided, handle them and exit
+	if *valueFlag != "" {
+		if *beepFlag {
+			beeep.Beep(beeep.DefaultFreq*2, beeep.DefaultDuration/4) // emulate scanner sound :)
+		}
+		EmulateTyping(*valueFlag, *delayFlag, *sendEnterFlag)
+		os.Exit(0)
+	}
+
+	// GUI logic starts here
 	var value *walk.TextEdit
 	var hotkeyLabel *walk.Label
 	var slider *walk.Slider
@@ -122,16 +141,16 @@ func main() {
 						},
 					},
 				},
-			}, 
+			},
 			HSplitter{
 				Children: []Widget{
 					Label{Text: "Input Key Delay"},
 					Slider{AssignTo: &slider, MinValue: 10, MaxValue: 100},
-					CheckBox{ 
-						Text: "Send ENTER at the end", 
+					CheckBox{
+						Text:     "Send ENTER at the end",
 						AssignTo: &sendEnter,
-						MinSize: Size{Width: 40, Height: 20},
-					},		
+						MinSize:  Size{Width: 40, Height: 20},
+					},
 				},
 			},
 		},
