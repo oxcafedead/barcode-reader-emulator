@@ -1,6 +1,6 @@
 # Download
 
-> Note: Only Windows supported fow now.
+> Note: Only Windows supported for now.
 
 To download the app, please visit [Releases](https://github.com/oxcafedead/barcode-reader-emulator/releases) page or
 just download by clicking the link:
