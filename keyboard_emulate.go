@@ -78,6 +78,8 @@ func translateToKeybd(s rune) (int, bool) {
 		return keybd_event.VK_H, false
 	case 'I':
 		return keybd_event.VK_I, false
+	case 'J':
+    	return keybd_event.VK_J, false
 	case 'K':
 		return keybd_event.VK_K, false
 	case 'L':
